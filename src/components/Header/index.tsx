@@ -1,22 +1,39 @@
+/**
+ * IMPORTS
+ */
+import {ActiveLink} from '../ActiveLink';
 import {SignInButton} from '../SignInButton';
 import styles from './styles.module.scss';
 
+
+/**
+ * EXPORTS
+ */
 export function Header ()
 {
+    // return component
     return (
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <img src="/images/logo.svg" alt="ig.news"/>
                 <nav>
-                    <a
-                        href=""
-                        className={styles.active}
+                    <ActiveLink
+                        href="/"
+                        activeClassName={styles.active}
                     >
-                        Home
-                    </a>
-                    <a href="">
-                        Posts
-                    </a>
+                        <a>
+                            Home
+                        </a>
+                    </ActiveLink>
+                    <ActiveLink
+                        href="/posts"
+                        activeClassName={styles.active}
+                        prefetch={true}
+                    >
+                        <a>
+                            Posts
+                        </a>
+                    </ActiveLink>
                 </nav>
 
                 <SignInButton />
