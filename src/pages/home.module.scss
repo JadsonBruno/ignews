@@ -43,3 +43,14 @@
         margin-top: 2.5rem;
     }
 }
+
+@media (max-width: 835px) 
+{
+    .contentContainer {
+        justify-content: center;
+
+        img {
+            display: none;
+        }
+    }
+}
