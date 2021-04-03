@@ -31,3 +31,16 @@
         filter: brightness(0.8);
     }
 }
+
+@media (max-width: 580px)
+{
+    .signInButton {
+        svg.closeIcon {
+            margin-left: 0.6rem;
+        }
+
+        svg:first-child {
+            margin-right: 0.6rem;
+        }
+    }
+}

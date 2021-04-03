@@ -56,3 +56,39 @@
         margin-left: auto;
     }
 }
+
+@media (max-width: 580px)
+{
+    .headerContent {
+        img {
+            width: 5rem;
+        }
+
+        nav {
+            margin-left: 2.5rem;
+        }
+
+        button {
+            padding: 0 1rem;
+
+            max-width: 9.125rem;
+        }
+    }
+}
+
+@media (max-width: 465px)
+{
+    .headerContent {
+        padding: 0 1rem;
+
+        nav {
+            margin-left: 1.5rem;
+
+            a {
+                & + a {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
