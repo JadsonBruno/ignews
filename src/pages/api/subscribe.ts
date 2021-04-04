@@ -76,8 +76,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 ],
                 mode: 'subscription',
                 allow_promotion_codes: true,
-                success_url: `${window.location.origin}/posts`,
-                cancel_url: `${window.location.origin}`
+                success_url: process.env.STRIPE_SUCCESS_URL,
+                cancel_url: process.env.STRIPE_CANCEL_URL
             }
         );
 
