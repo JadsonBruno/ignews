@@ -95,5 +95,6 @@ export default NextAuth({
         return false;
       }
     }
-  }
+  },
+  debug: true
 })
