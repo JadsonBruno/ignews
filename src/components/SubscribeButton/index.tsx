@@ -11,14 +11,13 @@ import styles from './styles.module.scss';
 /**
  * TYPES
  */
-import {SubscribeButtonProps} from './index.d';
 import {ISession} from '../../pages/posts/[slug]';
 
 
 /**
  * EXPORTS
  */
-export function SubscribeButton ({priceId}: SubscribeButtonProps)
+export function SubscribeButton ()
 {
     // get current session
     const [session] = useSession() as [ISession, boolean];
