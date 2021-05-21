@@ -7,12 +7,11 @@ import {stripe} from '../services/stripe';
 interface HomeProps {
   product: {
     priceId: string;
-    amount: number;
+    amount: string;
   }
 }
 
 export default function Home({product}: HomeProps) {
-
   return (
     <>
       <Head>
@@ -20,7 +19,7 @@ export default function Home({product}: HomeProps) {
           Home | ig.news
         </title>
       </Head>
-      
+
       <main className={styles.contentContainer}>
         <section className={styles.hero}>
           <span>
@@ -32,9 +31,7 @@ export default function Home({product}: HomeProps) {
             <span>for {product.amount} month</span>
           </p>
 
-          <SubscribeButton
-            priceId={product.priceId}
-          />
+          <SubscribeButton />
         </section>
         <img src="/images/avatar.svg" alt="Girl coding"/>
       </main>
