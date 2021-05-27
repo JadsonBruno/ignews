@@ -2,20 +2,20 @@
  * IMPORTS
  */
 import styles from '../post.module.scss';
-import {GetStaticProps} from "next";
+import { GetStaticProps } from "next";
 import Link from 'next/link';
 import Head from "next/head";
-import {RichText} from "prismic-dom";
-import {getPrismicClient} from "../../../services/prismic";
-import {useEffect} from 'react';
-import {useSession} from 'next-auth/client';
-import {useRouter} from 'next/router';
+import { RichText } from "prismic-dom";
+import { getPrismicClient } from "../../../services/prismic";
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 
 /**
  * TYPES
  */
-import {ISession} from '../[slug]';
+import { ISession } from '../[slug]';
 
 interface IPostPreviewProps {
     post: {
@@ -30,69 +30,66 @@ interface IPostPreviewProps {
 /**
  * EXPORTS
  */
-export default function PostProps ({post}: IPostPreviewProps) {
+export default function PostProps({ post }: IPostPreviewProps) {
     const [session] = useSession() as [ISession, boolean];
     const router = useRouter();
 
     // listen to session change
-    useEffect(() =>
-    {
-        if (!session?.activeSubscription)
-        {
+    useEffect(() => {
+        if (session?.activeSubscription) {
             router.push(`/posts/${post.slug}`);
         }
     }, [session]);
 
     return (
-       <>
-        <Head>
-            <title>{post.title} | Ignews</title>
-        </Head>
-        <main className={styles.container}>
-            <article className={styles.post}>
-                <h1>
-                    {post.title}
-                </h1>
-                <time>
-                    {post.updatedAt}
-                </time>
-                <div
-                    dangerouslySetInnerHTML={
-                        {
-                            __html: post.content
+        <>
+            <Head>
+                <title>{post.title} | Ignews</title>
+            </Head>
+            <main className={styles.container}>
+                <article className={styles.post}>
+                    <h1>
+                        {post.title}
+                    </h1>
+                    <time>
+                        {post.updatedAt}
+                    </time>
+                    <div
+                        dangerouslySetInnerHTML={
+                            {
+                                __html: post.content
+                            }
                         }
-                    }
-                    className={`${styles.postContent} ${styles.previewContent}`}
-                />
+                        className={`${styles.postContent} ${styles.previewContent}`}
+                    />
 
-                <div className={styles.continueReading}>
-                    Wanna continue reading?
+                    <div className={styles.continueReading}>
+                        Wanna continue reading?
                     <Link href="/">
-                        <a>
-                            Subscribe now 🤗
+                            <a>
+                                Subscribe now 🤗
                         </a>
-                    </Link>
-                </div>
-            </article>
-        </main>
-       </>
+                        </Link>
+                    </div>
+                </article>
+            </main>
+        </>
     );
 }
 
-export const getStaticPaths = () =>
-{
+export const getStaticPaths = () => {
     return {
         paths: [],
         fallback: 'blocking'
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params}) => {
-    const {slug} = params;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const { slug } = params;
 
     const prismic = getPrismicClient();
 
-    const response = await prismic.getByUID('post', String(slug), {lang: 'pt-br'});
+    const response = await prismic.getByUID('post', String(slug), { lang: 'pt-br' });
 
     const post = {
         slug,
@@ -106,7 +103,7 @@ export const getStaticProps: GetStaticProps = async ({ params}) => {
     };
 
     return {
-        props: {post},
+        props: { post },
         revalidate: 60 * 30 // 30 minutes
     }
 }
